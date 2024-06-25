@@ -553,54 +553,54 @@
   
 // }
 
+
+//Given a time in -hour AM/PM format, convert it to military (24-hour) time.
+
+//Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+//- 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
 function timeConversion(s) {
-  // Write your code here
+//convert string to lowCase, to ensure the function will work in edge case.
+const lowerCaseString= s.toLowerCase()
 
 //turn the string into an array
 //split the string ":"
-const hourArray= s.split(":")
-console.log(hourArray)
+const timeParts= lowerCaseString.split(":")
+console.log(timeParts)
 //remove AM/PM from the array and store it in the previous variable.
 //create a variable to store AM/PM
-const lastElement= hourArray.slice(-1)
-let amPm= lastElement[0].split("").slice(2).join("")
+let amPm= timeParts[2].slice(-2)
 console.log(amPm)
 //store the 1rst element of the array in an "hours" variable, parsed to number.
 //same with min and secs
-let hour= parseInt(hourArray[0]).toFixed()
-let min= parseInt(hourArray[1]).toFixed()
-let secs= parseInt(hourArray[2].split("").splice(0, 2).join("")).toFixed()
-console.log(hour)
+let hour= parseInt(timeParts[0])
+let min= parseInt(timeParts[1])
+let secs= parseInt(timeParts[2].slice(0, 2))
+console.log(secs)
 
-//If the hour is 12 && AM, hour===12.
-if(hour===12 && amPm==="AM"){
+//If the hour is 12 &&... 
+if(hour===12){
+  //AM, hour===00.
+  if(amPm==="am"){
   hour="00"
-  //If hour is 12 && PM, hour === 00
-} else if(hour===12 && amPm==="PM"){
+  // PM, hour === 12
+  } else if(amPm==="pm"){
   hour=12
   //else, hour+=12
-} else if(hour!==12 & amPm==="PM"){
-  hour+12
+  }
+  //if pm and different of 12, add 12.
+}  else if(hour!==12 ){
+    if(amPm==="pm") {
+      hour+=12}
 }
 
-if (hour<10){
-  hour = 0 + hour
-  console.log(hour)
+//add leading zero to numbers below 10.
+const militaryHour = hour.toString().padStart(2, "0")
+const militaryMinutes = min.toString().padStart(2, "0")
+const militarySeconds = secs.toString().padStart(2, "0")
+
+
+//return string with military format
+return `${militaryHour}:${militaryMinutes}:${militarySeconds}`
 }
 
-if (min<10){
-  min = 0 +min
-  console.log(min)
-}
-
-if (secs<10){
-  secs = 0 + secs
-  console.log(secs)
-}
-
-
-//return string with hour:min:secs
-return `${hour}:${min}:${secs}`
-}
-
-console.log(timeConversion("07:05:45PM"))
+console.log(timeConversion("2:5:45aM"))
