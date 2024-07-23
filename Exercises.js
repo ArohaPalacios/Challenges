@@ -554,53 +554,80 @@
 // }
 
 
-//Given a time in -hour AM/PM format, convert it to military (24-hour) time.
+// //Given a time in -hour AM/PM format, convert it to military (24-hour) time.
 
-//Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
-//- 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
-function timeConversion(s) {
-//convert string to lowCase, to ensure the function will work in edge case.
-const lowerCaseString= s.toLowerCase()
+// //Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+// //- 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+// function timeConversion(s) {
+// //convert string to lowCase, to ensure the function will work in edge case.
+// const lowerCaseString= s.toLowerCase()
 
-//turn the string into an array
-//split the string ":"
-const timeParts= lowerCaseString.split(":")
-console.log(timeParts)
-//remove AM/PM from the array and store it in the previous variable.
-//create a variable to store AM/PM
-let amPm= timeParts[2].slice(-2)
-console.log(amPm)
-//store the 1rst element of the array in an "hours" variable, parsed to number.
-//same with min and secs
-let hour= parseInt(timeParts[0])
-let min= parseInt(timeParts[1])
-let secs= parseInt(timeParts[2].slice(0, 2))
-console.log(secs)
+// //turn the string into an array
+// //split the string ":"
+// const timeParts= lowerCaseString.split(":")
+// console.log(timeParts)
+// //remove AM/PM from the array and store it in the previous variable.
+// //create a variable to store AM/PM
+// let amPm= timeParts[2].slice(-2)
+// console.log(amPm)
+// //store the 1rst element of the array in an "hours" variable, parsed to number.
+// //same with min and secs
+// let hour= parseInt(timeParts[0])
+// let min= parseInt(timeParts[1])
+// let secs= parseInt(timeParts[2].slice(0, 2))
+// console.log(secs)
 
-//If the hour is 12 &&... 
-if(hour===12){
-  //AM, hour===00.
-  if(amPm==="am"){
-  hour="00"
-  // PM, hour === 12
-  } else if(amPm==="pm"){
-  hour=12
-  //else, hour+=12
+// //If the hour is 12 &&... 
+// if(hour===12){
+//   //AM, hour===00.
+//   if(amPm==="am"){
+//   hour="00"
+//   // PM, hour === 12
+//   } else if(amPm==="pm"){
+//   hour=12
+//   //else, hour+=12
+//   }
+//   //if pm and different of 12, add 12.
+// }  else if(hour!==12 ){
+//     if(amPm==="pm") {
+//       hour+=12}
+// }
+
+// //add leading zero to numbers below 10.
+// const militaryHour = hour.toString().padStart(2, "0")
+// const militaryMinutes = min.toString().padStart(2, "0")
+// const militarySeconds = secs.toString().padStart(2, "0")
+
+
+// //return string with military format
+// return `${militaryHour}:${militaryMinutes}:${militarySeconds}`
+// }
+
+// console.log(timeConversion("2:5:45aM"))
+
+// Complete the solveMeFirst function in the editor below.
+
+// solveMeFirst has the following parameters:
+
+// int a: the first value
+// int b: the second value
+// Returns
+// - int: the sum of  and 
+
+
+//function receives 2 numbers. First one is a and second one is b.
+//make sure a and b are really numbers
+//a and b are greater than 1 and less than 1000
+//function returns the sum of a + b
+
+function solveMeFirst(a,b) {
+  if (typeof a !== "number" || typeof b !== "number") {
+      return "a and b must be numbers"}
+      
+if ( a >= 1 && a <= 1000 && b >= 1 && b <= 1000) {
+return a + b;
   }
-  //if pm and different of 12, add 12.
-}  else if(hour!==12 ){
-    if(amPm==="pm") {
-      hour+=12}
+
+else {return "a and b must be numbers between 1 and 1000" }
 }
-
-//add leading zero to numbers below 10.
-const militaryHour = hour.toString().padStart(2, "0")
-const militaryMinutes = min.toString().padStart(2, "0")
-const militarySeconds = secs.toString().padStart(2, "0")
-
-
-//return string with military format
-return `${militaryHour}:${militaryMinutes}:${militarySeconds}`
-}
-
-console.log(timeConversion("2:5:45aM"))
+console.log(solveMeFirst(1000,1000))
